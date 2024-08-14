@@ -9,8 +9,8 @@ contract TokenSwap is Ownable {
     IERC20 public backstageToken;
     uint256 public rate; // Сколько MATIC за 1 токен
 
-    constructor(IERC20 _token, uint256 _rate, address initialOwner) 
-        Ownable(initialOwner)
+    constructor(IERC20 _token, uint256 _rate) 
+        Ownable(msg.sender)
     {
         backstageToken = _token;
         rate = _rate;
