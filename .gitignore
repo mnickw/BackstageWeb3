@@ -1,4 +1,5 @@
 .deps/
+.states/
 # Azure Functions artifacts
 bin
 obj

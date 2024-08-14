@@ -22,7 +22,7 @@ contract QuizContract is Ownable {
     address[] public participants;
 
     // Constructor initializes the contract with the address of the token and sets the initial owner
-    constructor(address _backstageTokenAddress, address initialOwner) Ownable(initialOwner) {
+    constructor(address _backstageTokenAddress) payable Ownable(msg.sender) {
         backstageToken = IERC20(_backstageTokenAddress);
     }
 
