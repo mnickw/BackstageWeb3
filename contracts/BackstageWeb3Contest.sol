@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract QuizContract is Ownable {
     IERC20 public backstageToken;
     uint256 public constant TOKEN_AMOUNT = 25 * 10**18; // 25 Tokens (assuming 18 decimals)
-    uint256 public constant MATIC_AMOUNT = 0.01 ether; // Example Matic amount for gas fees
+    uint256 public constant MATIC_AMOUNT = 0.00005 ether; // amount for gas fees
     bool public quizEnded = false;
 
     struct Answer {

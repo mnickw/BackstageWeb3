@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract TokenSwap is Ownable {
     IERC20 public backstageToken;
-    uint256 public constant RATE = 5 * 10**16; // 1 bst = 0.05 Matic
+    uint256 public constant RATE = 5 * 10**13; // 1 bst = 0.00005 Matic
 
     constructor(IERC20 _token) 
         Ownable(msg.sender)
