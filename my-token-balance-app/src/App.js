@@ -469,7 +469,6 @@ const App = () => {
         const tokenContract = new Contract(tokenAddress, tokenABI, signer);
         const rawTokenBalance = await tokenContract.balanceOf(userAddress);
         const decimals = await tokenContract.decimals();
-        //console.log(parseFloat(formatEther(rawTokenBalance, decimals)));
         setTokenBalance(formatEther(rawTokenBalance, decimals));
       } else {
         alert('Please install MetaMask!');
@@ -480,7 +479,7 @@ const App = () => {
   }, []);
 
   const handleNext = () => {
-    if (parseFloat(tokenBalance) >= 25 && parseFloat(maticBalance) >= 0.01) {
+    if (parseFloat(tokenBalance) >= 25 && parseFloat(maticBalance) > 0) {
       navigate('/quiz');
     } else {
       alert('Insufficient balances to proceed.');
@@ -493,7 +492,7 @@ const App = () => {
       <p><strong>Address:</strong> {address}</p>
       <p><strong>MATIC Balance:</strong> {maticBalance}</p>
       <p><strong>Token Balance:</strong> {tokenBalance}</p>
-      <button onClick={handleNext} disabled={!(tokenBalance >= 25 && maticBalance >= 0.01)}>Next</button>
+      <button onClick={handleNext} disabled={!(tokenBalance >= 25 && maticBalance > 0)}>Next</button>
     </div>
   );
 };
