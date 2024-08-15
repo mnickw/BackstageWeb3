@@ -7,20 +7,19 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract TokenSwap is Ownable {
     IERC20 public backstageToken;
-    uint256 public rate; // Сколько MATIC за 1 токен
+    uint256 public constant RATE = 5 * 10**16; // 1 bst = 0.05 Matic
 
-    constructor(IERC20 _token, uint256 _rate) 
+    constructor(IERC20 _token) 
         Ownable(msg.sender)
     {
         backstageToken = _token;
-        rate = _rate;
     }
 
     function swap(uint256 tokenAmount) public {
-        uint256 maticAmount = tokenAmount * rate;
+        uint256 maticAmount = tokenAmount * RATE;
         require(address(this).balance >= maticAmount, "Not enough MATIC in contract");
 
-        backstageToken.transferFrom(msg.sender, address(this), tokenAmount);
+        backstageToken.transferFrom(msg.sender, address(this), tokenAmount * 10 ** 18);
         payable(msg.sender).transfer(maticAmount);
     }
 

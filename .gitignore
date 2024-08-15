@@ -1,5 +1,9 @@
 .deps/
 .states/
+artifacts/
+cache/
+typechain-types/
+
 # Azure Functions artifacts
 bin
 obj

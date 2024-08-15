@@ -27,6 +27,7 @@ contract QuizContract is Ownable {
     }
 
     // Function to set participants and handle token transfers
+    // use backstageToken.approve(quiz.getAddress(), BigInt(1000 * 10 ** 18)); before calling next func
     function setParticipants(address[] memory _participants) public onlyOwner {
         for (uint256 i = 0; i < _participants.length; i++) {
             address participant = _participants[i];
@@ -55,8 +56,8 @@ contract QuizContract is Ownable {
         }
     }
 
-    // need approve from user for totalBet
     // Function for participants to submit their answers and bets
+    // use backstageToken.connect(participant1).approve(quiz.getAddress(), BigInt(25 * 10 ** 18)); before calling next func
     function setAnswer(int8[5] memory _answersArray, int8[5] memory _bets) public {
         require(_answers[msg.sender].isParticipant, "You are not a participant");
 
@@ -86,7 +87,7 @@ contract QuizContract is Ownable {
 
             for (uint256 j = 0; j < 5; j++) {
                 if (ans.answers[j] == correctAnswer[j]) {
-                    uint256(int256(ans.bets[j])) * 2;
+                    winPrize += uint256(int256(ans.bets[j])) * 2;
                 }
             }
 
@@ -139,14 +140,14 @@ contract QuizContract is Ownable {
         // Reset the game state
         quizEnded = false;
 
-        // Clear the participants array
-        delete participants;
-
         // Reset each participant's status
         for (uint256 i = 0; i < participants.length; i++) {
             _answers[participants[i]].hasWithdrawn = false;
             _answers[participants[i]].isParticipant = false;
         }
+
+        // Clear the participants array
+        delete participants;
     }
 
     // Fallback function to allow the contract to receive MATIC
